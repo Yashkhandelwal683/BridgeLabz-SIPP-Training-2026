@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 abstract class WarehouseItem {
@@ -48,60 +47,18 @@ class Furniture extends WarehouseItem {
 }
 
 class Storage<T extends WarehouseItem> {
-    private List<T> items = new ArrayList<>();
+    private List<T> items = new java.util.ArrayList<>();
 
-    public void addItem(T item) {
-        items.add(item);
-    }
-
-    public T getItem(int index) {
-        return items.get(index);
-    }
-
-    public List<T> getAllItems() {
-        return items;
-    }
-
-    public int getCount() {
-        return items.size();
-    }
+    public void addItem(T item) { items.add(item); }
+    public T getItem(int index) { return items.get(index); }
+    public List<T> getAllItems() { return items; }
+    public int getCount() { return items.size(); }
 }
 
-public class WarehouseManagementSystem {
+class WarehouseUtils {
     public static void displayAllItems(List<? extends WarehouseItem> items) {
         for (WarehouseItem item : items) {
             System.out.println("Item: " + item.getName() + ", Price: $" + item.getPrice());
         }
-    }
-
-    public static void main(String[] args) {
-        Storage<Electronics> electronicsStorage = new Storage<>();
-        electronicsStorage.addItem(new Electronics("Laptop", 999.99, 24));
-        electronicsStorage.addItem(new Electronics("Phone", 699.99, 12));
-
-        Storage<Groceries> groceriesStorage = new Storage<>();
-        groceriesStorage.addItem(new Groceries("Apple", 0.99, "2026-07-15"));
-        groceriesStorage.addItem(new Groceries("Milk", 2.99, "2026-07-10"));
-
-        Storage<Furniture> furnitureStorage = new Storage<>();
-        furnitureStorage.addItem(new Furniture("Table", 149.99, "Wood"));
-        furnitureStorage.addItem(new Furniture("Chair", 89.99, "Metal"));
-
-        System.out.println("--- Electronics ---");
-        displayAllItems(electronicsStorage.getAllItems());
-
-        System.out.println("--- Groceries ---");
-        displayAllItems(groceriesStorage.getAllItems());
-
-        System.out.println("--- Furniture ---");
-        displayAllItems(furnitureStorage.getAllItems());
-
-        List<WarehouseItem> allItems = new ArrayList<>();
-        allItems.addAll(electronicsStorage.getAllItems());
-        allItems.addAll(groceriesStorage.getAllItems());
-        allItems.addAll(furnitureStorage.getAllItems());
-
-        System.out.println("--- All Items (Wildcard) ---");
-        displayAllItems(allItems);
     }
 }
